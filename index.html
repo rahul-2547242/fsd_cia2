@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <script src="https://cdn.tailwindcss.com/3.4.16"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+
+<body>
+
+    <div class="header bg-gray-800 text-white p-4 flex flex-col items-center">
+        <img src="logo.jpeg" alt="Logo" class="h-16 mb-4">
+        <h1>CofeeHub</h1>
+    </div>
+
+    <div class="nav-link bg-red-700 text-white p-2">
+        <div class="navbar-link flex items-center gap-2 py-3">
+            <i class="fa-solid fa-house"></i>
+            <a href="index.html">Home</a>
+        </div>
+        <div class="navbar-link flex items-center gap-2 py-3">
+            <i class="fa-solid fa-mug-hot"></i>
+            <a href="coffees.html">Coffees</a>
+        </div>
+        <div class="navbar-link flex items-center gap-2 py-3">
+            <i class="fa-solid fa-phone"></i>
+            <a href="contact.html">Contact</a>
+        </div>
+    </div>
+
+    <div class="video-section pt-5">
+        <h1 class="text-2xl text-center">Coffee Brewing Methods</h1>
+        <div class="video-player p-5 flex justify-center">
+            <video controls class="sm:w-1/2" autoplay muted loop>
+                <source src="Set2_Video.mp4" type="video/mp4">
+                <track src="subtitles.vtt" kind="subtitles" srclang="en" label="English">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+    </div>
+
+    <div class="audio-section">
+        <h1 class="text-2xl text-center">Coffee Types</h1>
+        <div class="audio-player p-5 flex justify-center">
+            <audio controls>
+                <source src="Set2_Audio.mp3" type="audio/mpeg">
+                Your browser does not support the audio element.
+            </audio>
+        </div>
+    </div>
+
+    <footer class="relative z-10 bg-gray-50 bg-opacity-90 text-center">
+        <div class="container p-4 text-center text-gray-600">
+            <p>&copy; CoffeeHub</p>
+        </div>
+    </footer>
+
+    <div class="fixed inset-0 -z-10">
+        <div class="bg-[url('banner.jpeg')] bg-cover bg-center h-screen"></div>
+        <div class="absolute inset-0 bg-white bg-opacity-70"></div>
+    </div>
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
