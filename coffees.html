@@ -35,26 +35,6 @@
     </div>
 
     <div class="container mx-auto px-4 py-8">
-        <div class="flex flex-col md:flex-row justify-between items-center mb-8 gap-4">
-            <div class="w-full md:w-1/2">
-                <div class="relative">
-                    <input type="text" id="search-input" placeholder="Search coffees..." 
-                           class="w-full p-2 pl-10 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-700">
-                    <i class="fa-solid fa-magnifying-glass absolute left-3 top-3 text-gray-400"></i>
-                </div>
-            </div>
-            <div class="w-full md:w-1/2 flex gap-4">
-                <button id="search-btn" class="bg-red-700 hover:bg-red-800 text-white px-4 py-2 rounded-lg transition">
-                    Search
-                </button>
-                <select id="sort-select" class="p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-700">
-                    <option value="">Sort by</option>
-                    <option value="asc">Name (A-Z)</option>
-                    <option value="desc">Name (Z-A)</option>
-                </select>
-            </div>
-        </div>
-
         <h2 class="text-3xl font-bold text-center mb-8">Types of Coffees</h2>
         <div id="coffee-list" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"></div>
     </div>
@@ -70,81 +50,7 @@
         <div class="absolute inset-0 bg-white bg-opacity-70"></div>
     </div>
 
-    <script>
-        $(document).ready(function() {
-            const apiUrl = 'https://api.sampleapis.com/coffee/hot';
-            let coffees = [];
-            
-            function fetchCoffees() {
-                $.get(apiUrl, function(data) {
-                    coffees = data.slice(0, 8); 
-                    displayCoffees(coffees);
-                }).fail(function() {
-                    $('#coffee-list').html('<p class="text-red-600 col-span-4 text-center">Failed to load coffee data. Please try again later.</p>');
-                });
-            }
-            
-            function displayCoffees(coffeeArray) {
-                if (coffeeArray.length === 0) {
-                    $('#coffee-list').html('<p class="text-gray-600 col-span-4 text-center">No coffees found matching your search.</p>');
-                    return;
-                }
-                
-                $('#coffee-list').empty();
-                coffeeArray.forEach(coffee => {
-                    const coffeeCard = `
-                        <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition">
-                            <img src="${coffee.image}" alt="${coffee.title}" class="w-full h-48 object-cover">
-                            <div class="p-4">
-                                <h3 class="text-xl font-bold mb-2">${coffee.title}</h3>
-                                <p class="text-gray-600 mb-4">${coffee.description}</p>
-                                <div class="mt-4">
-                                    <h4 class="font-semibold text-gray-800">Ingredients:</h4>
-                                    <p class="text-gray-600">${coffee.ingredients.join(', ')}</p>
-                                </div>
-                            </div>
-                        </div>
-                    `;
-                    $('#coffee-list').append(coffeeCard);
-                });
-            }
-            
-            $('#search-btn').click(function() {
-                const searchTerm = $('#search-input').val().toLowerCase();
-                if (!searchTerm) {
-                    displayCoffees(coffees);
-                    return;
-                }
-                
-                const filtered = coffees.filter(coffee => 
-                    coffee.title.toLowerCase().includes(searchTerm)
-                );
-                displayCoffees(filtered);
-            });
-            
-            $('#search-input').keypress(function(e) {
-                if (e.which === 13) {
-                    $('#search-btn').click();
-                }
-            });
-            
-            $('#sort-select').change(function() {
-                const sortValue = $(this).val();
-                let sortedCoffees = [...coffees];
-                
-                if (sortValue === 'asc') {
-                    sortedCoffees.sort((a, b) => a.title.localeCompare(b.title));
-                } else if (sortValue === 'desc') {
-                    sortedCoffees.sort((a, b) => b.title.localeCompare(a.title));
-                }
-                
-                displayCoffees(sortedCoffees);
-            });
-            
-            fetchCoffees();
-        });
-    </script>
-
+    <script src="script.js"></script>
 </body>
 
 </html>
