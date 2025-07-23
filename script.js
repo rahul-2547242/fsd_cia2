@@ -2,40 +2,37 @@
 displayStoredData();
 
 document.getElementById("contactForm").addEventListener("submit", function (event) {
-        event.preventDefault();
-        const name = document.getElementById("name").value;
-        const email = document.getElementById("email").value;
-        const fav_coffee = document.getElementById("fav-coffee").value;
+    event.preventDefault();
+    const name = document.getElementById("name").value;
+    const email = document.getElementById("email").value;
+    const fav_coffee = document.getElementById("fav-coffee").value;
 
-        const formData = {
-            name: name,
-            email: email,
-            fav_coffee: fav_coffee
-        };
-        console.log("Form submitted:", formData);
-
-        localStorage.setItem("contactFormData", JSON.stringify(formData));
-
-        sessionStorage.setItem("contactFormData", JSON.stringify(formData));
-
-        displayStoredData();
-
-        this.reset();
-    });
+    const formData = {
+        name: name,
+        email: email,
+        fav_coffee: fav_coffee
+    };
+    
+    localStorage.setItem("contactFormData", JSON.stringify(formData));
+    sessionStorage.setItem("contactFormData", JSON.stringify(formData));
+    
+    displayStoredData();
+    this.reset();
+});
 
 function displayStoredData() {
     const localData = JSON.parse(localStorage.getItem("contactFormData"));
     const sessionData = JSON.parse(sessionStorage.getItem("contactFormData"));
 
-    const name = JSON.stringify(localData.name);
-    const fav_coffee = JSON.stringify(localData.fav_coffee);
-
-    // document.getElementById("form-output").textContent = `Hello, ${localData.name}! You Love ${localData.fav_coffee}.`;
-    document.getElementById("form-output").textContent = `Hello, ${name}! You Love ${fav_coffee}`;
-
-    // document.getElementById("localData").textContent = `Local Storage: ${JSON.stringify(localData)}`;
-    // document.getElementById("sessionData").textContent = `Session Storage: ${JSON.stringify(sessionData)}`;
+    const outputElement = document.getElementById("form-output");
+    outputElement.textContent = "";
+    
+    if (localData) {
+        outputElement.textContent = `Hello, ${localData.name}! You Love ${localData.fav_coffee}.`;
+    }
+    
 }
+displayStoredData();
 
 window.onload = function () {
     if (navigator.geolocation) {
