@@ -79,14 +79,6 @@ $(document).ready(function () {
   }
 
   function displayCoffees(coffeeArray) {
-    if (coffeeArray.length === 0) {
-      $("#coffee-list").html(
-        '<p class="text-gray-600 col-span-4 text-center">No coffees available at the moment.</p>'
-      );
-      return;
-    }
-
-    $("#coffee-list").empty();
     coffeeArray.forEach((coffee) => {
       const coffeeCard = `
                 <div class="bg-white rounded-lg shadow-md overflow-hidden">
