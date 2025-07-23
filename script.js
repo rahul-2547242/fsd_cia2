@@ -68,3 +68,43 @@ function showErr(error) {
             break;
     }
 }
+
+$(document).ready(function() {
+    const apiUrl = 'https://api.sampleapis.com/coffee/hot';
+    
+    function fetchCoffees() {
+        $.get(apiUrl, function(data) {
+            const coffees = data.slice(0, 8); 
+            displayCoffees(coffees);
+        }).fail(function() {
+            $('#coffee-list').html('<p class="text-red-600 col-span-4 text-center">Failed to load coffee data. Please try again later.</p>');
+        });
+    }
+    
+    function displayCoffees(coffeeArray) {
+        if (coffeeArray.length === 0) {
+            $('#coffee-list').html('<p class="text-gray-600 col-span-4 text-center">No coffees available at the moment.</p>');
+            return;
+        }
+        
+        $('#coffee-list').empty();
+        coffeeArray.forEach(coffee => {
+            const coffeeCard = `
+                <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition">
+                    <img src="${coffee.image}" alt="${coffee.title}" class="w-full h-48 object-cover">
+                    <div class="p-4">
+                        <h3 class="text-xl font-bold mb-2">${coffee.title}</h3>
+                        <p class="text-gray-600 mb-4">${coffee.description}</p>
+                        <div class="mt-4">
+                            <h4 class="font-semibold text-gray-800">Ingredients:</h4>
+                            <p class="text-gray-600">${coffee.ingredients.join(', ')}</p>
+                        </div>
+                    </div>
+                </div>
+            `;
+            $('#coffee-list').append(coffeeCard);
+        });
+    }
+    
+    fetchCoffees();
+});
